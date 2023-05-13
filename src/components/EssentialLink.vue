@@ -2,7 +2,7 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
+    :target="targetBlank ? '_blank' : undefined"
     :href="link"
   >
     <q-item-section
@@ -25,10 +25,12 @@ export interface EssentialLinkProps {
   caption?: string;
   link?: string;
   icon?: string;
+  targetBlank?: boolean;
 }
 withDefaults(defineProps<EssentialLinkProps>(), {
   caption: '',
   link: '#',
   icon: '',
+  targetBlank: false,
 });
 </script>

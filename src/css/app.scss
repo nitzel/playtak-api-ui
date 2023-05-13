@@ -1,1 +1,46 @@
 // app global css in SCSS form
+a {
+  color: $primary;
+}
+
+body.desktop {
+  &::-webkit-scrollbar-corner,
+  ::-webkit-scrollbar-corner {
+    background: $separator-dark-color;
+  }
+
+  &::-webkit-scrollbar,
+  ::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb,
+  ::-webkit-scrollbar-thumb {
+    border: 0;
+    box-shadow: none;
+    min-height: 40px;
+    background: $grey-5;
+
+    &:hover {
+      background: $grey-6;
+    }
+  }
+
+  &.body--dark {
+    &::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-thumb {
+      background: $grey-9;
+
+      &:hover {
+        background: $grey-8;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}

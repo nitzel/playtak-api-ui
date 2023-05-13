@@ -101,7 +101,7 @@ module.exports = {
     'max-len': [
       'warn',
       {
-        code: 120, // max line length
+        code: 140, // max line length
         ignoreComments: true, // ignore long lines in comments
         ignoreTrailingComments: true, // ignore long lines in trailing comments
         ignoreUrls: true, // ignore long lines in URLs
@@ -110,5 +110,7 @@ module.exports = {
         ignoreRegExpLiterals: true, // ignore long lines in regular expressions
       },
     ],
+    'no-plusplus': 'off',
+    'arrow-parens': 'off',
   },
 };
