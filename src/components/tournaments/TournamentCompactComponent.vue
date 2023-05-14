@@ -10,8 +10,14 @@
     </q-card-section>
 
     <q-card-actions>
-      <q-btn flat color="primary" label="Join" :disable="tournament.finished"/>
-      <RouterLink :to="{ name: 'tournament', params: { tournamentId: tournament.id }}">
+      <span>
+        <q-btn flat color="primary" label="Join" :disable="tournament.finished"/>
+        <q-tooltip>Not yet implemented</q-tooltip>
+      </span>
+      <RouterLink
+        v-if="showDetailsLink"
+        :to="{ name: 'tournament', params: { tournamentId: tournament.id }}"
+      >
         <q-btn flat color="primary" label="View details"/>
       </RouterLink>
 
@@ -43,7 +49,8 @@ import { TournamentSummary } from 'src/types/tournament';
 import { ref } from 'vue';
 
 defineProps<{
-  tournament: TournamentSummary
+  tournament: TournamentSummary,
+  showDetailsLink?: boolean
 }>();
 const expanded = ref(false);
 

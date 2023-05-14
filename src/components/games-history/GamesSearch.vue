@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { SearchData } from 'src/types/tak';
+import { boardSizeOptions } from 'src/services/constants';
 
+// eslint-disable-next-line no-unused-vars
 const emit = defineEmits<{(e: 'searchEvent', props: SearchData): void
   }>();
 
 const searchData = defineProps<{
-    data: any,
+    data: SearchData,
   }>();
 
 const formData = ref(searchData.data);
@@ -24,14 +26,6 @@ const resultOptions = [
   { group: 'Draw', disable: true },
   { label: '1/2-1/2', value: '1/2-1/2', description: 'Draw' },
 ];
-const sizeOptions = [
-  { label: '3 x 3', value: 3 },
-  { label: '4 x 4', value: 4 },
-  { label: '5 x 5', value: 5 },
-  { label: '6 x 6', value: 6 },
-  { label: '7 x 7', value: 7 },
-  { label: '8 x 8', value: 8 },
-];
 const typeOptions: Array<string> = ['Normal', 'Tournament', 'Unrated'];
 
 function clearForm() {
@@ -43,7 +37,6 @@ function sendFormData() {
     'searchEvent',
     {
       ...formData.value,
-      size: formData.value.size?.value,
     },
   );
 }
@@ -97,7 +90,12 @@ function sendFormData() {
                   </q-item>
                 </template>
               </q-select>
-              <q-select v-model="formData.size" :options="sizeOptions" label="Board Size" map-options clearable single-line item-aligned />
+              <q-select
+                v-model="formData.size"
+                :options="boardSizeOptions"
+                label="Board Size"
+                map-options clearable single-line item-aligned emit-value
+              />
             </q-list>
             <div style="min-width: 15em;" class="col row justify-around q-py-sm q-mx-md">
               <q-toggle v-model="formData.mirror" label="Mirror search" />

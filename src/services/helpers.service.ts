@@ -18,12 +18,15 @@ export default class Helpers {
   }
 
   /** Intended for game times and increments */
-  public static formatSeconds(n: number) {
-    const remainder = n % 60;
-    if (n < 60) return `${n}s`;
-    const minutes = Math.floor(n / 60);
-    if (!remainder) return `${minutes}m`;
-    return `${minutes}m${remainder}s`;
+  public static formatSeconds(totalSeconds: number) {
+    if (totalSeconds === 0) return '0s';
+    const seconds = totalSeconds % 60;
+    const remainingMinutes = Math.floor(totalSeconds / 60);
+    const minutes = remainingMinutes % 60;
+    const hours = Math.floor(remainingMinutes / 60);
+    return (hours ? `${hours}h` : '')
+      + (minutes ? `${minutes}m` : '')
+      + (seconds ? `${seconds}s` : '');
   }
 
   public static sortById<T extends { id: number }>(array?: T[]): T[] {

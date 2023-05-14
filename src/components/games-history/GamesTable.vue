@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue';
 import { LocalStorage } from 'quasar';
 import { GameData } from 'src/types/tak';
 import { Pagination } from 'src/types/pagination';
+import { standardCapstoneCount, standardPieceCount } from 'src/services/constants';
 
 const emit = defineEmits<{(e: 'pageEvent', props: any): void,
     (e: 'copyEvent', game: GameData): void,
@@ -128,8 +129,8 @@ function getGameType(game: GameData) {
 }
 
 function hasPieceVariation(game: GameData) {
-  const stdpieces = [0, 0, 0, 10, 15, 21, 30, 40, 50][game.size];
-  const stdcaps = [0, 0, 0, 0, 0, 1, 1, 2, 2][game.size];
+  const stdpieces = standardPieceCount[game.size];
+  const stdcaps = standardCapstoneCount[game.size];
   const gpieces = game.pieces === -1 ? stdpieces : game.pieces;
   const gcaps = game.capstones === -1 ? stdcaps : game.capstones;
   if (gpieces !== stdpieces || gcaps !== stdcaps) {

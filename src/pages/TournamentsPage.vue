@@ -3,7 +3,9 @@
 
     <h5>
       Open Tournaments
-      <q-btn icon="add_circle_outline" dense text-color="primary" disable/>
+      <q-btn icon="add_circle_outline" dense text-color="primary" label="Add tournament">
+        <q-tooltip>Not yet implemented</q-tooltip>
+      </q-btn>
     </h5>
     <div class="row flex-start q-gutter-md tournaments-container">
       <div
@@ -13,6 +15,7 @@
       >
         <TournamentEntry
           :tournament="tournament"
+          show-details-link
         />
       </div>
     </div>
@@ -26,6 +29,7 @@
       >
         <TournamentEntry
           :tournament="tournament"
+          show-details-link
         />
       </div>
     </div>
@@ -47,7 +51,6 @@ onBeforeMount(async () => {
   try {
     tournaments.value = undefined;
     tournaments.value = await getTournaments();
-    console.log('tournaments', tournaments.value);
   } catch (exc: unknown) {
     console.error('Unexpected error', exc);
   }

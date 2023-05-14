@@ -4,7 +4,9 @@
     <h5>Tournament #{{ tournamentId }}</h5>
     <div class="row flex-start q-gutter-md tournaments-container">
       <div class="col-12">
-        <TournamentEntry :tournament="tournament" v-if="tournament"/>
+        <TournamentEntry
+          :tournament="tournament" v-if="tournament"
+        />
         <span v-else-if="errorWhileLoading">Error while loading tournament: {{ errorWhileLoading }}</span>
         <span v-else>Loading...</span>
       </div>

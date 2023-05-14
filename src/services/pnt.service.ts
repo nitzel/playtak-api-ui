@@ -21,6 +21,22 @@ export async function createSeek(game: TournamentGame): Promise<SeekDto> {
   throw new PlaytakApiError(await response.json());
 }
 
+export async function addRuleset(ruleset: Omit<GameRuleset, 'id'>) {
+  const url = `${PLAYTAK_API_BASE_URL}/tournaments/game-rules`;
+  if (ruleset.extraTimeAmount === 0) { // if no time is added then no need for a trigger move
+    ruleset.extraTimeTriggerMove = 0;
+  }
+  const response = await fetch(url, {
+    method: 'PUT',
+    body: JSON.stringify(ruleset),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.ok) return response.json();
+  throw new PlaytakApiError(await response.json());
+}
+
 export async function addGame(matchup: Partial<TournamentGameUpsert>): Promise<TournamentGame> {
   const url = `${PLAYTAK_API_BASE_URL}/tournaments/game`;
   const response = await fetch(url, {

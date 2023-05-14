@@ -36,7 +36,17 @@
           <!-- TODO rephrase once the playtak-api supports creating the seek as the logged in user -->
           Create seek as {{ matchup.player1 }}
         </q-btn>
-        <RulesetCompactComponent :ruleset="game.rules" v-if="game.rules.id != stageRules.id"/>
+        <q-chip
+          v-if="game.rules.id != stageRules.id"
+          rounded
+          :label="`${game.rules.name} rules`"
+          color="secondary"
+        >
+          <q-tooltip class="bg-black">
+            This game uses a different ruleset than the default ruleset "{{ stageRules.name }}" of this stage.
+            <RulesetCompactComponent :ruleset="game.rules" v-if="game.rules.id != stageRules.id"/>
+          </q-tooltip>
+        </q-chip>
       </div>
       <AddGameDialog
         :matchup="matchup"
