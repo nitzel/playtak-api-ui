@@ -1,6 +1,6 @@
 import { date } from 'quasar';
 
-export class Helpers {
+export default class Helpers {
   public static formatDateTime(d: number|Date, includeSeconds = false): string {
     if (includeSeconds) {
       return date.formatDate(d, 'YYYY-mm-dd hh:mm:ss');
@@ -24,5 +24,10 @@ export class Helpers {
     const minutes = Math.floor(n / 60);
     if (!remainder) return `${minutes}m`;
     return `${minutes}m${remainder}s`;
+  }
+
+  public static sortById<T extends { id: number }>(array?: T[]): T[] {
+    if (array === undefined) return [];
+    return [...array].sort((a, b) => a.id - b.id);
   }
 }

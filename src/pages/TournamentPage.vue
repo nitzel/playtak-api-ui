@@ -11,7 +11,7 @@
     </div>
     <h6>Stages</h6>
     <div v-if="tournament?.stages?.length">
-      <div v-for="stage in tournament.stages" v-bind:key="stage.id">
+      <div v-for="stage in sortedGroups" v-bind:key="stage.id">
         <StageComponent
           :stage="stage"
           @modified="onStageModified"
@@ -34,15 +34,17 @@ import {
 } from 'src/services/pnt.service';
 import { TournamentDetails, TournamentStage } from 'src/types/tournament';
 import {
-  watch, ref,
+  watch, ref, computed,
 } from 'vue';
 import { useRoute } from 'vue-router';
 import StageComponent from 'src/components/tournaments/StageComponent.vue';
+import Helpers from 'src/services/helpers.service';
 
 const route = useRoute();
 const tournamentId = ref<number>();
 const tournament = ref<TournamentDetails>();
 const errorWhileLoading = ref<string>();
+const sortedGroups = computed(() => Helpers.sortById(tournament.value?.stages));
 
 watch(
   () => route.params.tournamentId,

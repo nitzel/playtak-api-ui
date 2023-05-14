@@ -5,7 +5,7 @@
     </q-card-section>
     <q-card-section>
       <div
-        v-for="game in matchup.games"
+        v-for="game in sortedGames"
         v-bind:key="game.id"
       >
         Game #{{ game.id}}
@@ -52,6 +52,8 @@
 import { GameRuleset, TournamentGame, TournamentMatchup } from 'src/types/tournament';
 import { createSeek } from 'src/services/pnt.service';
 import { useQuasar } from 'quasar';
+import { computed } from 'vue';
+import Helpers from 'src/services/helpers.service';
 import AddGameDialog from './AddGameDialog.vue';
 import RulesetCompactComponent from './RulesetCompactComponent.vue';
 // import GameComponent from './GameComponent.vue';
@@ -63,6 +65,8 @@ const props = defineProps<{
   stageRules: GameRuleset,
 }>();
 const $q = useQuasar();
+
+const sortedGames = computed(() => Helpers.sortById(props.matchup.games));
 
 function onGameAdded(game: TournamentGame) {
   emit('modified', {

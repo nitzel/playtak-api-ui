@@ -16,7 +16,7 @@
       <div v-show="expanded">
         <q-separator />
         <div
-          v-for="matchup in group.matchups"
+          v-for="matchup in sortedMatchups"
           v-bind:key="matchup.id"
         >
           <q-card-section
@@ -38,7 +38,8 @@
 
 <script setup lang="ts">
 import { GameRuleset, TournamentGroup, TournamentMatchup } from 'src/types/tournament';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import Helpers from 'src/services/helpers.service';
 import AddMatchupDialog from './AddMatchupDialog.vue';
 import MatchupComponent from './MatchupComponent.vue';
 
@@ -49,6 +50,7 @@ const props = defineProps<{
   stageRules: GameRuleset,
 }>();
 const expanded = ref(true);
+const sortedMatchups = computed(() => Helpers.sortById(props.group.matchups));
 
 function onMatchupAdded(matchup: TournamentMatchup) {
   emit('modified', {

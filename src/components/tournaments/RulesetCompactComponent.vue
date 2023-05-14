@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { Helpers } from 'src/services/helpers.service';
+import Helpers from 'src/services/helpers.service';
 import { GameRuleset } from 'src/types/tournament';
 
 defineProps<{

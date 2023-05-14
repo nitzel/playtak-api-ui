@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { GameService } from 'src/services/game.service';
-import { Helpers } from 'src/services/helpers.service';
+import Helpers from 'src/services/helpers.service';
 import { ref } from 'vue';
 
 type DatabaseInfo = {

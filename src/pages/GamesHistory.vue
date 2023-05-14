@@ -10,7 +10,7 @@ import { PTNService } from 'src/services/ptn.service';
 import { GameService } from 'src/services/game.service';
 import { SearchData, GameData } from 'src/types/tak';
 import { Pagination } from 'src/types/pagination';
-import { Helpers } from 'src/services/helpers.service';
+import Helpers from 'src/services/helpers.service';
 import PtnDialogComponent from 'components/PtnDialogComponent.vue';
 
 const $q = useQuasar();

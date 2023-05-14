@@ -19,7 +19,7 @@
           <RulesetCompactComponent :ruleset="stage.rules"/>
         </q-card-section>
         <q-card-section
-          v-for="group in stage.groups"
+          v-for="group in sortedGroups"
           v-bind:key="group.id"
           class="text-subitle2"
         >
@@ -37,7 +37,8 @@
 
 <script setup lang="ts">
 import { TournamentGroup, TournamentStage } from 'src/types/tournament';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import Helpers from 'src/services/helpers.service';
 import RulesetCompactComponent from './RulesetCompactComponent.vue';
 import AddGroupDialog from './AddGroupDialog.vue';
 import GroupComponent from './GroupComponent.vue';
@@ -48,6 +49,7 @@ const props = defineProps<{
   stage: TournamentStage
 }>();
 const expanded = ref(true);
+const sortedGroups = computed(() => Helpers.sortById(props.stage.groups));
 
 function onGroupAdded(group: TournamentGroup) {
   emit('modified', {
