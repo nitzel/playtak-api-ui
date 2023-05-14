@@ -14,14 +14,20 @@ export interface GameRuleset {
   pieces: number;
 }
 
-export interface TournamentGame {
+interface BaseTournamentGame {
   id: number
-  rules: GameRuleset | number
   player1goesFirst?: boolean
   playtakId?: number
   result?: string
   matchup?: number
 }
+export interface TournamentGame extends BaseTournamentGame {
+  rules: GameRuleset
+}
+export interface TournamentGameUpsert extends BaseTournamentGame {
+  rules: number
+}
+
 export interface TournamentMatchup {
   id: number
   player1: string
@@ -37,12 +43,17 @@ export interface TournamentGroup {
   stage?: number
 }
 
-export interface TournamentStage {
+interface BaseTournamentStage {
   id: number
   name: string
-  rules: GameRuleset | number
   groups: TournamentGroup[]
   tournament?: number
+}
+export interface TournamentStage extends BaseTournamentStage {
+  rules: GameRuleset
+}
+export interface TournamentStageUpsert extends BaseTournamentStage {
+  rules: number
 }
 
 export interface TournamentSummary {

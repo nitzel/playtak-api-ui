@@ -1,3 +1,11 @@
+export enum Color {
+  /* eslint-disable no-unused-vars */
+  White = 'WHITE',
+  Black = 'BLACK',
+  Any = 'ANY',
+  /* eslint-enable no-unused-vars */
+}
+
 export interface GameData {
   id: number
   date: number
@@ -39,4 +47,22 @@ export interface SearchData {
   player_black?: string
   player_white?: string
   type?: 'Normal' | 'Tournament' | 'Unrated' | string;
+}
+
+export interface SeekDto {
+  id: number;
+  pntId: number;
+  creator: string;
+  opponent: string;
+  timeContingent: number;
+  timeIncrement: number;
+  extraTimeTriggerMove: number;
+  extraTimeAmount: number;
+  komi: number;
+  boardSize: number;
+  capstones: number;
+  pieces: number;
+  unrated: boolean;
+  tournament: boolean;
+  color: Color;
 }

@@ -74,7 +74,7 @@ async function onSubmit() {
     emit('added', newMatchup);
     showDialog.value = false;
     $q.notify({
-      message: 'Group added',
+      message: 'Matchup added',
       position: 'top',
       type: 'success',
     });

@@ -52,7 +52,7 @@
 import { useQuasar } from 'quasar';
 import { getRulesets, addStage } from 'src/services/pnt.service';
 import {
-  GameRuleset, TournamentDetails, TournamentStage, TournamentSummary,
+  GameRuleset, TournamentDetails, TournamentStage, TournamentStageUpsert, TournamentSummary,
 } from 'src/types/tournament';
 import { computed, ref } from 'vue';
 
@@ -64,7 +64,7 @@ const props = defineProps<{
 const $q = useQuasar();
 
 const showDialog = ref(false);
-const formData = ref<Partial<TournamentStage>>({});
+const formData = ref<Partial<TournamentStageUpsert>>({});
 
 const gameRulesets = ref<GameRuleset[]>();
 const gameRulesetOptions = computed(() => gameRulesets.value && gameRulesets.value.map(r => ({ label: r.name, value: r.id })));

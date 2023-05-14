@@ -23,7 +23,11 @@
             v-if="(typeof group !== 'number')"
             class="text-subitle2"
           >
-            <MatchupComponent :matchup="matchup" @modified="onMatchupModified"/>
+            <MatchupComponent
+              :matchup="matchup"
+              :stage-rules="stageRules"
+              @modified="onMatchupModified"
+            />
           </q-card-section>
         </div>
         <AddMatchupDialog :group="group" @added="onMatchupAdded"/>
@@ -33,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { TournamentGroup, TournamentMatchup } from 'src/types/tournament';
+import { GameRuleset, TournamentGroup, TournamentMatchup } from 'src/types/tournament';
 import { ref } from 'vue';
 import AddMatchupDialog from './AddMatchupDialog.vue';
 import MatchupComponent from './MatchupComponent.vue';
@@ -41,7 +45,8 @@ import MatchupComponent from './MatchupComponent.vue';
 // eslint-disable-next-line no-unused-vars
 const emit = defineEmits<{(e: 'modified', group: TournamentGroup): void}>();
 const props = defineProps<{
-  group: TournamentGroup
+  group: TournamentGroup,
+  stageRules: GameRuleset,
 }>();
 const expanded = ref(true);
 

@@ -16,14 +16,18 @@
       <div v-show="expanded">
         <q-separator />
         <q-card-section>
-          <RulesetCompactComponent :ruleset="stage.rules" v-if="(typeof stage.rules !== 'number')"/>
+          <RulesetCompactComponent :ruleset="stage.rules"/>
         </q-card-section>
         <q-card-section
           v-for="group in stage.groups"
           v-bind:key="group.id"
           class="text-subitle2"
         >
-          <GroupComponent :group="group" @modified="onGroupModified"/>
+          <GroupComponent
+            :group="group"
+            :stage-rules="stage.rules"
+            @modified="onGroupModified"
+          />
         </q-card-section>
         <AddGroupDialog :stage="stage" @added="onGroupAdded"/>
       </div>

@@ -40,11 +40,9 @@
 
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import { getRulesets, addGroup } from 'src/services/pnt.service';
-import {
-  GameRuleset, TournamentGroup, TournamentStage,
-} from 'src/types/tournament';
-import { computed, ref } from 'vue';
+import { addGroup } from 'src/services/pnt.service';
+import { TournamentGroup, TournamentStage } from 'src/types/tournament';
+import { ref } from 'vue';
 
 // eslint-disable-next-line no-unused-vars
 const emit = defineEmits<{(e: 'added', stage: TournamentGroup): void}>();
