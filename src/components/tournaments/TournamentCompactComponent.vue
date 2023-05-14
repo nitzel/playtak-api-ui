@@ -1,5 +1,5 @@
 <template>
-  <q-card class="tournament" flat bordered>
+  <q-card flat bordered>
     <q-card-section>
       <div class="text-overline text-orange-9">#{{ tournament.id }}</div>
       <div class="text-h5 q-mt-sm q-mb-xs">{{ tournament.name }}</div>
@@ -50,7 +50,4 @@ const expanded = ref(false);
 </script>
 
 <style scoped>
-.tournament {
-  display: block;
-}
 </style>

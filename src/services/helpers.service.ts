@@ -16,4 +16,13 @@ export class Helpers {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return `${parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
   }
+
+  /** Intended for game times and increments */
+  public static formatSeconds(n: number) {
+    const remainder = n % 60;
+    if (n < 60) return `${n}s`;
+    const minutes = Math.floor(n / 60);
+    if (!remainder) return `${minutes}m`;
+    return `${minutes}m${remainder}s`;
+  }
 }

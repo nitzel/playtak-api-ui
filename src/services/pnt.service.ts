@@ -1,4 +1,6 @@
-import { GameRuleset, TournamentDetails, TournamentSummary } from 'src/types/tournament';
+import {
+  GameRuleset, TournamentDetails, TournamentGroup, TournamentMatchup, TournamentStage, TournamentSummary,
+} from 'src/types/tournament';
 
 const PLAYTAK_API_BASE_URL = `${import.meta.env.VITE_API_HOST}/v1`;
 
@@ -6,6 +8,45 @@ export class PlaytakApiError extends Error {
   constructor(data: { message: string }) {
     super(data.message);
   }
+}
+
+export async function addMatchup(matchup: Partial<TournamentMatchup>): Promise<TournamentMatchup> {
+  const url = `${PLAYTAK_API_BASE_URL}/tournaments/matchups`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    body: JSON.stringify(matchup),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.ok) return response.json();
+  throw new PlaytakApiError(await response.json());
+}
+
+export async function addGroup(group: Partial<TournamentGroup>): Promise<TournamentGroup> {
+  const url = `${PLAYTAK_API_BASE_URL}/tournaments/groups`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    body: JSON.stringify(group),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.ok) return response.json();
+  throw new PlaytakApiError(await response.json());
+}
+
+export async function addStage(stage: Partial<TournamentStage>): Promise<TournamentStage> {
+  const url = `${PLAYTAK_API_BASE_URL}/tournaments/stages`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    body: JSON.stringify(stage),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.ok) return response.json();
+  throw new PlaytakApiError(await response.json());
 }
 
 export async function getTournaments(): Promise<TournamentSummary[]> {

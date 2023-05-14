@@ -1,7 +1,10 @@
 <template>
   <q-page class="tournaments-page">
 
-    <h5>Open Tournaments</h5>
+    <h5>
+      Open Tournaments
+      <q-btn icon="add_circle_outline" dense text-color="primary" disable/>
+    </h5>
     <div class="row flex-start q-gutter-md tournaments-container">
       <div
         v-for="tournament of openTournaments"

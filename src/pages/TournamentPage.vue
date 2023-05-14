@@ -12,41 +12,37 @@
     <h6>Stages</h6>
     <div v-if="tournament?.stages?.length">
       <div v-for="stage in tournament.stages" v-bind:key="stage.id">
-        #{{ stage.id }} {{ stage.name }} {{ typeof stage.rules == 'number' ? stage.rules : stage.rules.id}}
+        <StageComponent
+          :stage="stage"
+          @modified="onStageModified"
+        />
       </div>
     </div>
-    <div v-else>No stages</div>
-    <!-- <q-form
-      @submit="onAddStage"
-      class="q-gutter-md"
-    >
-      <q-input
-        filled
-        v-model="newStageName"
-        label="Stage name"
-        lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please enter a name for the new stage']"
-      />
-      <div>
-        <q-btn label="Submit" type="submit" color="primary"/>
-      </div>
-    </q-form> -->
+    <AddStageDialog
+      v-if="tournament"
+      :tournament="tournament"
+      @stage-added="onStageAdded"
+    />
   </q-page>
 </template>
 
 <script setup lang="ts">
 import TournamentEntry from 'components/tournaments/TournamentCompactComponent.vue';
-import { getTournament, PlaytakApiError } from 'src/services/pnt.service';
-import { TournamentDetails } from 'src/types/tournament';
-import { watch, ref } from 'vue';
+import AddStageDialog from 'components/tournaments/AddStageDialog.vue';
+import {
+  getTournament, PlaytakApiError,
+} from 'src/services/pnt.service';
+import { TournamentDetails, TournamentStage } from 'src/types/tournament';
+import {
+  watch, ref,
+} from 'vue';
 import { useRoute } from 'vue-router';
+import StageComponent from 'src/components/tournaments/StageComponent.vue';
 
 const route = useRoute();
 const tournamentId = ref<number>();
 const tournament = ref<TournamentDetails>();
 const errorWhileLoading = ref<string>();
-
-// const newStageName = ref<string>();
 
 watch(
   () => route.params.tournamentId,
@@ -68,6 +64,17 @@ watch(tournamentId, async (newId) => {
     else console.error('Unexpected error', exc);
   }
 }, { immediate: true });
+
+function onStageAdded(stage: TournamentStage) {
+  if (!tournament.value) return;
+  tournament.value.stages.push(stage);
+}
+
+function onStageModified(stage: TournamentStage) {
+  if (!tournament.value) return;
+  const index = tournament.value.stages.findIndex(({ id }) => id === stage.id);
+  tournament.value.stages[index] = stage;
+}
 
 </script>
 
