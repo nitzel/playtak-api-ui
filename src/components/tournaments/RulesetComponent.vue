@@ -13,7 +13,7 @@
           v-if="ruleset.extraTimeAmount"
           color="secondary"
         >
-          @{{ Helpers.formatSeconds(ruleset.extraTimeTriggerMove) }} +{{ Helpers.formatSeconds(ruleset.extraTimeAmount) }}
+          @{{ ruleset.extraTimeTriggerMove }} +{{ Helpers.formatSeconds(ruleset.extraTimeAmount) }}
         </q-badge>
         <q-badge  color="secondary">{{ruleset.komi }} Komi</q-badge>
       </div>
