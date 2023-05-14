@@ -84,6 +84,18 @@ const sidebarLinks: EssentialLinkProps[] = [
     icon: 'history_edu',
     link: '/#/games',
   },
+  {
+    title: 'Tournaments',
+    caption: 'Playtak Native Tournaments',
+    icon: 'emoji_events',
+    link: '/#/tournaments',
+  },
+  {
+    title: 'Rulesets',
+    caption: 'PNT Game Rulesets',
+    icon: 'balance',
+    link: '/#/tournaments/game-rulesets',
+  },
 ];
 
 const leftDrawerOpen = ref(false);
