@@ -56,11 +56,14 @@ export interface TournamentStageUpsert extends BaseTournamentStage {
   rules: number
 }
 
-export interface TournamentSummary {
-  id: number
+export interface TournamentUpsert {
   name: string
   description: string
   finished: boolean
+}
+
+export interface TournamentSummary extends TournamentUpsert {
+  id: number
 }
 
 export interface TournamentDetails extends TournamentSummary {

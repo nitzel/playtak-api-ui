@@ -1,7 +1,7 @@
 import { SeekDto } from 'src/types/tak';
 import {
   GameRuleset, TournamentDetails, TournamentGame, TournamentGameUpsert, TournamentGroup,
-  TournamentMatchup, TournamentStage, TournamentStageUpsert, TournamentSummary,
+  TournamentMatchup, TournamentStage, TournamentStageUpsert, TournamentSummary, TournamentUpsert,
 } from 'src/types/tournament';
 
 const PLAYTAK_API_BASE_URL = `${import.meta.env.VITE_API_HOST}/v1`;
@@ -78,6 +78,19 @@ export async function addGroup(group: Partial<TournamentGroup>): Promise<Tournam
 
 export async function addStage(stage: Partial<TournamentStageUpsert>): Promise<TournamentStage> {
   const url = `${PLAYTAK_API_BASE_URL}/tournaments/stages`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    body: JSON.stringify(stage),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.ok) return response.json();
+  throw new PlaytakApiError(await response.json());
+}
+
+export async function addTournament(stage: TournamentUpsert): Promise<TournamentSummary> {
+  const url = `${PLAYTAK_API_BASE_URL}/tournaments`;
   const response = await fetch(url, {
     method: 'PUT',
     body: JSON.stringify(stage),
