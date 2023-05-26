@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          <q-img src="/capstone.svg" class="logo"/>
+          <q-img :src="'capstone.svg'" class="logo"/>
           <span v-show="$q.screen.gt.xs">Playtak New UI</span>
         </q-toolbar-title>
          <q-space />
@@ -55,9 +55,12 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
 import { Dark, LocalStorage } from 'quasar';
 import GamesDbInfoDialogComponent from 'components/GamesDbInfoDialogComponent.vue';
+
+const router = useRouter();
 
 const lightMode = computed({
   get(): boolean {
@@ -76,25 +79,25 @@ const sidebarLinks: EssentialLinkProps[] = [
     title: 'Main',
     caption: 'Start page',
     icon: 'home',
-    link: '/#/',
+    link: router.resolve({ name: 'root' }).href,
   },
   {
     title: 'Games-History',
     caption: 'games-history',
     icon: 'history_edu',
-    link: '/#/games',
+    link: router.resolve({ name: 'games-history' }).href,
   },
   {
     title: 'Tournaments',
     caption: 'Playtak Native Tournaments',
     icon: 'emoji_events',
-    link: '/#/tournaments',
+    link: router.resolve({ name: 'all-tournaments' }).href,
   },
   {
     title: 'Rulesets',
     caption: 'PNT Game Rulesets',
     icon: 'balance',
-    link: '/#/tournaments/game-rulesets',
+    link: router.resolve({ name: 'game-rulesets' }).href,
   },
 ];
 

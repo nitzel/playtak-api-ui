@@ -72,7 +72,7 @@ module.exports = configure((/* ctx */) => ({
 
     // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-    // publicPath: '/',
+    publicPath: '/nui',
     // analyze: true,
     // env: {},
     // rawDefine: {}

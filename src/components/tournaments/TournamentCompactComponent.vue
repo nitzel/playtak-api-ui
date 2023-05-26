@@ -16,7 +16,7 @@
       </span>
       <RouterLink
         v-if="showDetailsLink"
-        :to="{ name: 'tournament', params: { tournamentId: tournament.id }}"
+        :to="{ name: 'single-tournament', params: { tournamentId: tournament.id }}"
       >
         <q-btn flat color="primary" label="View details"/>
       </RouterLink>

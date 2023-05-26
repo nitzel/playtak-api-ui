@@ -2,6 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
+    name: 'root',
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
@@ -11,24 +12,24 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/IndexPage.vue'),
       },
       {
-        name: 'games',
+        name: 'games-history',
         path: 'games',
         component: () => import('pages/GamesHistory.vue'),
       },
       {
-        name: 'tournaments',
+        name: 'all-tournaments',
         path: 'tournaments',
         component: () => import('pages/TournamentsPage.vue'),
       },
       {
-        name: 'tournament',
+        name: 'single-tournament',
         path: 'tournaments/:tournamentId',
-        component: import('pages/TournamentPage.vue'),
+        component: () => import('pages/TournamentPage.vue'),
       },
       {
         name: 'game-rulesets',
         path: 'tournaments/game-rulesets',
-        component: import('pages/TournamentRulesetsPage.vue'),
+        component: () => import('pages/TournamentRulesetsPage.vue'),
       },
     ],
   },
