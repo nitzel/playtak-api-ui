@@ -1,16 +1,8 @@
 FROM node:lts-alpine as dev
 RUN npm install -g @quasar/cli
-# expecting . to be mounted to /app
+# expects . to be mounted to /app
 WORKDIR /app
-COPY ./package.json ./
-COPY ./package-lock.json ./
-
-RUN --mount=type=cache,target=/app/.npmcache \
-    npm install --cache /app/.npmcache --loglevel error
-
-# RUN npm install
-# ENTRYPOINT tail -f /dev/null
-ENTRYPOINT npm run dev -- --port 80
+CMD npm install && npm run dev -- --port 80
 
 FROM node:lts-alpine as build
 RUN npm i -g @quasar/cli
